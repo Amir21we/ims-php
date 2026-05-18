@@ -1,0 +1,102 @@
+/* ── Customers Page ────────────────────────────────────────── */
+.customers-page { }
+
+.customers-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 20px 0 14px;
+}
+
+.customers-toolbar .left  { display: flex; flex-direction: column; gap: 4px; }
+.customers-toolbar .right { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* customer form */
+.customer-form {
+    display: none;
+    animation: fadeIn 0.25s ease-out;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 16px;
+}
+
+.customer-field  { margin-bottom: 16px; }
+
+.customer-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.customer-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.18s;
+}
+
+.customer-input:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(0,212,170,0.12);
+}
+
+.customer-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+/* delete / danger button */
+.btn-delete {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid rgba(239,68,68,0.2);
+    padding: 7px 12px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: inherit;
+    transition: all 0.18s;
+}
+
+.btn-delete:hover { background: #dc2626; color: white; border-color: #dc2626; }
+
+.btn-gap-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.inline-form { display: inline; }
+
+/* search */
+.search-wrap { margin: 20px 0 16px; }
+
+.search-box {
+    position: relative;
+    max-width: 440px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 13px;
+    pointer-events: none;
+}
+
+#searchInput { padding-left: 40px; }

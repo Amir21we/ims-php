@@ -1,0 +1,193 @@
+/* ── Manage Users Page ─────────────────────────────────────── */
+.mu-page {}
+
+.mu-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 24px;
+    margin-top: 20px;
+    min-width: 0;
+}
+
+.mu-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.mu-section-title i { color: var(--teal); }
+
+.mu-form .mu-field { margin-bottom: 14px; }
+
+/* Role guide cards */
+.role-guide {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 14px;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.rg-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+}
+
+.rg-item strong { font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.rg-item span   { font-size: 11px; color: var(--text-muted); margin-left: 18px; }
+
+.rg-manager  { background: rgba(59,130,246,0.08); color: #2563eb; }
+.rg-staff    { background: rgba(245,158,11,0.08);  color: #d97706; }
+.rg-customer { background: rgba(139,92,246,0.08);  color: #7c3aed; }
+
+/* Users table */
+.mu-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.mu-table thead tr { background: var(--navy); }
+
+.mu-table th {
+    padding: 11px 18px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: rgba(255,255,255,0.75);
+    text-align: left;
+}
+
+.mu-table th:first-child { border-radius: 0; }
+.mu-table th:last-child  { border-radius: 0; }
+
+.mu-table td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: middle;
+}
+
+.mu-table tbody tr:last-child td { border-bottom: none; }
+.mu-table tbody tr:hover { background: var(--surface-2); }
+
+/* user cell with avatar */
+.mu-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mu-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+}
+
+.mu-avatar-1 { background: var(--teal); color: var(--navy); }
+.mu-avatar-2 { background: #3b82f6; }
+.mu-avatar-3 { background: #f59e0b; }
+.mu-avatar-4 { background: #8b5cf6; }
+
+.mu-name { font-weight: 600; color: var(--text-primary); font-size: 14px; }
+
+.mu-self-tag {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mu-username { color: var(--text-muted); font-family: monospace; font-size: 13px; }
+
+/* Role badges */
+.mu-role-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.role-admin    { background: rgba(0,212,170,0.12); color: var(--teal); }
+.role-manager  { background: rgba(59,130,246,0.12); color: #2563eb; }
+.role-staff    { background: rgba(245,158,11,0.12); color: #d97706; }
+.role-customer { background: rgba(139,92,246,0.12); color: #7c3aed; }
+
+/* inline role select */
+.mu-role-select {
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-dark);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--surface);
+    color: var(--text-primary);
+}
+
+.mu-protected {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.mu-count {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* delete button */
+.btn-danger {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid rgba(239,68,68,0.2);
+    padding: 7px 12px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: inherit;
+    transition: all 0.18s;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+    color: white;
+    border-color: #dc2626;
+}
+
+.inline-form { display: inline; }
+
+@media (max-width: 900px) {
+    .mu-grid { grid-template-columns: 1fr; }
+}

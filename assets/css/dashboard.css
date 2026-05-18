@@ -1,0 +1,127 @@
+/* ============================================================
+   Oracle NetSuite Dashboard Grid & Portlet Layouts
+   ============================================================ */
+
+.netsuite-dashboard-grid {
+    display: grid;
+    grid-template-columns: 24% 49% 24%;
+    gap: 20px;
+    margin-top: 15px;
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.netsuite-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+/* Middle column tiles and panels */
+.netsuite-dashboard-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.netsuite-dashboard-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.netsuite-select-sm {
+    padding: 2px 6px !important;
+    font-size: 11px !important;
+    height: 22px !important;
+    border-radius: 4px !important;
+    width: auto !important;
+    border: 1px solid #d2d7df !important;
+    background: #ffffff !important;
+    color: #333333 !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+}
+
+/* KPI Portlet Specific styles */
+.netsuite-kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    color: #333333;
+    margin-top: 10px;
+}
+
+.netsuite-kpi-table th {
+    text-align: left;
+    font-weight: 700;
+    color: #555555;
+    padding: 6px 8px;
+    border-bottom: 2px solid #d2d7df;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.netsuite-kpi-table td {
+    padding: 8px;
+    border-bottom: 1px solid #eaecef;
+    vertical-align: middle;
+}
+
+.netsuite-kpi-table tr:hover td {
+    background: #f4f5f8;
+}
+
+.netsuite-kpi-indicator {
+    font-weight: 600;
+    color: #104f75;
+}
+
+.netsuite-kpi-value {
+    font-weight: 600;
+    color: #333333;
+}
+
+.netsuite-kpi-change-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.netsuite-kpi-change-pill.up { color: #2c8a4c; }
+.netsuite-kpi-change-pill.down { color: #e05650; }
+
+/* Shortening quick actions row in cards */
+.netsuite-quick-actions-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .netsuite-dashboard-grid {
+        grid-template-columns: 28% 69%;
+    }
+    .netsuite-col-right {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .netsuite-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .netsuite-col-right {
+        grid-column: span 1;
+        grid-template-columns: 1fr;
+    }
+}

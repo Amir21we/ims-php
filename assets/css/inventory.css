@@ -1,0 +1,156 @@
+/* ── Inventory Page ────────────────────────────────────────── */
+.inventory-page { }
+
+.inventory-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 20px 0 14px;
+}
+
+.inventory-toolbar .left  { display: flex; flex-direction: column; gap: 4px; }
+.inventory-toolbar .right { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.movement-toggle {
+    display: flex;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 4px;
+    margin: 20px 0;
+    gap: 4px;
+}
+
+.movement-btn {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: inherit;
+}
+
+.movement-btn.active {
+    background: var(--surface);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.movement-btn.in.active  { color: var(--teal); }
+.movement-btn.out.active { color: #ef4444; }
+
+/* quantity control */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    margin: 16px 0;
+}
+
+.quantity-btn {
+    width: 52px; height: 52px;
+    background: var(--surface);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    font-size: 24px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s;
+    flex-shrink: 0;
+}
+
+.quantity-btn:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    background: var(--teal-light);
+}
+
+#qty {
+    font-size: 42px;
+    font-weight: 900;
+    width: 140px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+#qty:focus { outline: none; }
+
+.inventory-field { margin-bottom: 14px; }
+
+.inventory-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.inventory-input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.18s;
+}
+
+.inventory-input:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(0,212,170,0.12);
+}
+
+/* stock movement history */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.history-table thead tr { background: var(--navy); }
+
+.history-table th {
+    padding: 10px 16px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: rgba(255,255,255,0.75);
+    text-align: left;
+}
+
+.history-table th:first-child { border-radius: 8px 0 0 8px; }
+.history-table th:last-child  { border-radius: 0 8px 8px 0; }
+
+.history-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: middle;
+}
+
+.history-table tbody tr:last-child td { border-bottom: none; }
+.history-table tbody tr:hover { background: var(--surface-2); }
+
+.movement-in  { color: var(--teal);  font-weight: 700; }
+.movement-out { color: #ef4444; font-weight: 700; }
