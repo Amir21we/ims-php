@@ -1,14 +1,36 @@
 <?php
 session_start();
 
-$host = 'localhost';
-$db   = 'inventory_db';
-$user = 'root';
-$pass = '';   // change if you have MySQL password
+$dbHost = getenv('DB_HOST') ?: '127.0.0.1';
+$dbPort = getenv('DB_PORT') ?: '3306';
+$dbName = getenv('DB_NAME') ?: 'inventory_db';
+$dbUser = getenv('DB_USER') ?: 'root';
+$dbPass = getenv('DB_PASS') ?: '';
+$dbCharset = getenv('DB_CHARSET') ?: 'utf8mb4';
+
+$pdoOptions = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+];
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $safeDbName = str_replace('`', '``', $dbName);
+    $bootstrap = new PDO(
+        "mysql:host={$dbHost};port={$dbPort};charset={$dbCharset}",
+        $dbUser,
+        $dbPass,
+        $pdoOptions
+    );
+
+    $bootstrap->exec("CREATE DATABASE IF NOT EXISTS `{$safeDbName}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+
+    $pdo = new PDO(
+        "mysql:host={$dbHost};port={$dbPort};dbname={$dbName};charset={$dbCharset}",
+        $dbUser,
+        $dbPass,
+        $pdoOptions
+    );
 
     // ── Legacy columns (keep for backward compat) ─────────────
     $pdo->exec("ALTER TABLE tblproducts ADD COLUMN IF NOT EXISTS UserID INT NULL");
@@ -42,10 +64,10 @@ try {
     // Seed roles if empty
     $roleCount = $pdo->query("SELECT COUNT(*) FROM tblroles")->fetchColumn();
     if ($roleCount == 0) {
-        $pdo->exec("INSERT INTO tblroles (RoleID, RoleName) VALUES 
-            (1, 'Admin'), 
-            (2, 'Manager'), 
-            (3, 'Staff'), 
+        $pdo->exec("INSERT INTO tblroles (RoleID, RoleName) VALUES
+            (1, 'Admin'),
+            (2, 'Manager'),
+            (3, 'Staff'),
             (4, 'Customer')");
     } else {
         // Ensure role 3 and 4 exist if they were missing from a previous version
@@ -225,9 +247,9 @@ try {
             ProductID   INT NOT NULL,
             CompanyID   INT NOT NULL,
             UserID      INT NOT NULL,
-            Type        VARCHAR(20) NOT NULL, -- e.g., 'IN', 'OUT', 'SET'
-            Quantity    INT NOT NULL,         -- amount changed
-            Reason      VARCHAR(100) NULL,    -- e.g., 'Sales Order #1', 'Manual Adjustment'
+            Type        VARCHAR(20) NOT NULL,
+            Quantity    INT NOT NULL,
+            Reason      VARCHAR(100) NULL,
             CreatedAt   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             INDEX idx_move_product (ProductID),
             INDEX idx_move_company (CompanyID)
@@ -238,7 +260,10 @@ try {
     $pdo->exec("ALTER TABLE tblproducts ADD COLUMN IF NOT EXISTS ImageURL VARCHAR(255) NULL");
 
 } catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+    die(
+        'Database connection failed. Set DB_HOST, DB_NAME, DB_USER and DB_PASS in your environment, or create the database first.<br><br>' .
+        htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8')
+    );
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -329,26 +354,36 @@ function e($str): string {
  * Role label for display.
  */
 function roleName(int $roleId): string {
-    return match($roleId) {
-        ROLE_ADMIN    => 'Admin',
-        ROLE_MANAGER  => 'Manager',
-        ROLE_STAFF    => 'Inventory Staff',
-        ROLE_CUSTOMER => 'Customer',
-        default       => 'Unknown',
-    };
+    switch ($roleId) {
+        case ROLE_ADMIN:
+            return 'Admin';
+        case ROLE_MANAGER:
+            return 'Manager';
+        case ROLE_STAFF:
+            return 'Inventory Staff';
+        case ROLE_CUSTOMER:
+            return 'Customer';
+        default:
+            return 'Unknown';
+    }
 }
 
 /**
  * Role badge CSS class.
  */
 function roleBadgeClass(int $roleId): string {
-    return match($roleId) {
-        ROLE_ADMIN    => 'role-admin',
-        ROLE_MANAGER  => 'role-manager',
-        ROLE_STAFF    => 'role-staff',
-        ROLE_CUSTOMER => 'role-customer',
-        default       => '',
-    };
+    switch ($roleId) {
+        case ROLE_ADMIN:
+            return 'role-admin';
+        case ROLE_MANAGER:
+            return 'role-manager';
+        case ROLE_STAFF:
+            return 'role-staff';
+        case ROLE_CUSTOMER:
+            return 'role-customer';
+        default:
+            return '';
+    }
 }
 
 /**
